@@ -1,9 +1,9 @@
 /*
  * $Id: wce_stdlib.h,v 1.2 2006/04/09 16:48:18 mloskot Exp $
  *
- * Equivalent of <stdlib.h> - standard library definitions.
+ * stdlib.h - standard library definitions
  *
- * Created by Mateusz Loskot, mloskot@taxussi.com.pl
+ * Created by Mateusz Loskot (mateusz@loskot.net)
  *
  * Copyright (c) 2006 Taxus SI Ltd.
  *
@@ -46,8 +46,16 @@ extern "C" {
 
 
 /* Generate an abnormal process abort. */
+
 void wceex_abort(void);
 
+/* Searching and sorting utilities. */
+
+void* wceex_bsearch(const void *key, const void *base, size_t nmemb, size_t size,
+                    int (*compar)(const void *, const void *));
+
+void* wceex_lfind(const void *key, const void *base, size_t *nmemb, size_t size,
+                 int(*compar)(const void *, const void *));
 
 #ifdef __cplusplus
 }

@@ -1,9 +1,9 @@
 /*
  * $Id: wce_io.h,v 1.2 2006/04/09 16:48:18 mloskot Exp $
  *
- * Equivalent of <io.h> - file handling functions.
+ * io.h - file handling functions
  *
- * Created by Mateusz Loskot, mloskot@taxussi.com.pl
+ * Created by Mateusz Loskot (mateusz@loskot.net)
  *
  * Copyright (c) 2006 Taxus SI Ltd.
  *
