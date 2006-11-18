@@ -649,6 +649,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\wce_clock.c"
+				>
+			</File>
+			<File
 				RelativePath="..\src\wce_ctime.c"
 				>
 			</File>
@@ -658,6 +662,10 @@
 			</File>
 			<File
 				RelativePath="..\src\wce_findfile.c"
+				>
+			</File>
+			<File
+				RelativePath="..\src\wce_getenv.c"
 				>
 			</File>
 			<File
@@ -689,6 +697,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\wce_setlocale.c"
+				>
+			</File>
+			<File
 				RelativePath="..\src\wce_stat.c"
 				>
 			</File>
@@ -714,6 +726,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\src\errno.h"
+				>
+			</File>
 			<File
 				RelativePath="..\src\wce_errno.h"
 				>
