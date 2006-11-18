@@ -57,6 +57,10 @@ void* wceex_bsearch(const void *key, const void *base, size_t nmemb, size_t size
 void* wceex_lfind(const void *key, const void *base, size_t *nmemb, size_t size,
                  int(*compar)(const void *, const void *));
 
+/* Dummy compilation enablers - functions that do not provide any implementation. */
+
+char* wceex_getenv(const char* varname); 
+
 #ifdef __cplusplus
 }
 #endif  /* __cplusplus */
