@@ -35,6 +35,7 @@
  */
 
 #include <windows.h>
+#include <assert.h>
 
 /*******************************************************************************
 * wceex_rewind - Reset the file position indicator in a stream
@@ -62,12 +63,38 @@
 *******************************************************************************/
 void wceex_rewind(FILE * fp)
 {
-    /* HANDLE is a typedef of void* */
-    HANDLE hFile = (void*)fp;
-	
-    if (0xFFFFFFFF == SetFilePointer(hFile,0,0,FILE_BEGIN))
+    int ret;
+
+    /* TODO - mloskot: WARNING!
+     * fseek() does not clear error and end-of-file indicators for the stream
+     * So, that's why dirty asserts are used to get informed about potential problems.
+     */
+    ret = fseek(fp, 0L, SEEK_SET);
+    
+    assert(0 == ret);
+    assert(0 == ferror(fp));
+    assert(!feof(fp));
+
+    /*
+
+    // XXX - mloskot:
+    // FILE* to HANDLE conversion needs hacks like _get_osfhandle()
+    // which are not available on Windows CE.
+    // Simple cast does not work.
+    //
+    // TODO: Does anyone know how to convert FILE* to HANDLE?
+
+    DWORD dwError;
+    HANDLE hFile;
+
+    hFile = (void*)fp;
+
+    if (0xFFFFFFFF == SetFilePointer(hFile, 0, NULL, FILE_BEGIN))
     {
-    	; /* No return */
+    	dwError = GetLastError();
+        assert(NO_ERROR == dwError);
     }
+
+    */
 }
 
