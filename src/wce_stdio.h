@@ -37,7 +37,7 @@
 #define WCEEX_STDIO_H    1
 
 #if !defined(_WIN32_WCE)
-# error "Only Winddows CE target is supported!"
+# error "Only Windows CE target is supported!"
 #endif
 
 
@@ -50,6 +50,7 @@ extern "C" {
 
 int wceex_rename(const char *oldfile, const char *newfile);
 int wceex_unlink(const char *filename);
+int wceex_wunlink(const wchar_t *filename);
 void wceex_rewind(FILE *stream);
 
 

@@ -37,8 +37,14 @@
 #define WCEEX_STDLIB_H 1
 
 #if !defined(_WIN32_WCE)
-# error "Only Winddows CE target is supported!"
+# error "Only Windows CE target is supported!"
 #endif
+
+#include <windows.h>
+
+#define _MAX_DIR   256
+#define _MAX_FNAME 256
+#define _MAX_EXT   256
 
 #ifdef __cplusplus
 extern "C" {
@@ -56,6 +62,26 @@ void* wceex_bsearch(const void *key, const void *base, size_t nmemb, size_t size
 
 void* wceex_lfind(const void *key, const void *base, size_t *nmemb, size_t size,
                  int(*compar)(const void *, const void *));
+
+/* File Management Functions */
+
+void wceex_splitpath( const char *path, 
+                      char *drive, char *dir, char *name, char *ext );
+void wceex_wsplitpath( const wchar_t *path, 
+                       wchar_t *drive, wchar_t *dir, wchar_t *name, wchar_t *ext );
+
+void wceex_makepath( char *path,
+                     const char *drive, const char *dir,
+                     const char *name, const char *ext );
+void wceex_wmakepath( wchar_t *path,
+                      const wchar_t *drive, const wchar_t *dir,
+                      const wchar_t *name, const wchar_t *ext );
+
+char*    wceex_fullpath( char *absPath, const char *relPath, size_t maxLength );
+wchar_t* wceex_wfullpath( wchar_t *absPath, const wchar_t *relPath, size_t maxLength );
+
+DWORD wceex_GetFullPathNameW( LPCWSTR lpFileName, DWORD nBufferLength, 
+                              LPWSTR lpBuffer, LPWSTR *lpFilePart );
 
 /* Dummy compilation enablers - functions that do not provide any implementation. */
 
