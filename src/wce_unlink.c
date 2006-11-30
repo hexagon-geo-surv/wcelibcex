@@ -35,6 +35,7 @@
  */
 
 #include <windows.h>
+#include <wce_errno.h>
 
 /*******************************************************************************
 * wceex_unlink -remove a directory entry.
@@ -69,6 +70,31 @@ int wceex_unlink(const char *filename)
     if (res)
         return 0; /* success */
     else
+    {
+        errno = GetLastError();
         return -1;
+    }
 }
 
+/*******************************************************************************
+* wceex_wunlink -remove a directory entry.
+*
+* Return:
+*
+*   Upon successful completion, 0 shall be returned. Otherwise, -1.
+*       
+* Reference:
+*
+*   IEEE 1003.1, 2004 Edition
+*
+*******************************************************************************/
+int wceex_wunlink(const wchar_t *filename)
+{
+    if( DeleteFile(filename) )
+        return 0;
+    else
+    {
+        errno = GetLastError();
+        return -1;
+    }
+}
