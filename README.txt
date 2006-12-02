@@ -4,7 +4,7 @@ The WCELIBCEX is a package of C library extensions for Windows CE
 operating system. It is a supplement to standard C library
 available on Windows CE system.
 
-Author: Mateusz Loskot <mateusz@loskot.net>
+Maintainer: Mateusz Loskot <mateusz@loskot.net>
 
 Homepage: http://sourceforge.net/projects/wcelibcex
 Wiki: http://wcelibcex.sourceforge.net
