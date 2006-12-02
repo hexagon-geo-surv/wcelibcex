@@ -1,7 +1,7 @@
 /*
  * $Id: wce_time.h,v 1.2 2006/04/09 16:48:18 mloskot Exp $
  *
- * time.h - time types.
+ * time.h and sys/time.h - time types and functions
  *
  * Created by Mateusz Loskot (mateusz@loskot.net)
  *
@@ -40,7 +40,6 @@
 # error "Only Winddows CE target is supported!"
 #endif
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif  /* __cplusplus */
@@ -51,8 +50,8 @@ extern "C" {
 
 #ifndef _TIME_T_DEFINED
 typedef long    time_t;		/* time value as number of seconds of the Epoch */
-# define _TIME_T_DEFINED
-#endif
+#define _TIME_T_DEFINED
+#endif /* _TIME_T_DEFINED */
 
 #ifndef _TM_DEFINED
 struct tm
@@ -67,12 +66,27 @@ struct tm
 	int tm_yday;	/* days since January 1 - [0,365] */
 	int tm_isdst;	/* daylight savings time flag */
 };
-# define _TM_DEFINED
-#endif
+#define _TM_DEFINED
+#endif /* _TM_DEFINED */
+
+#ifndef _TIMEZONE_DEFINED
+struct timezone
+{
+    int tz_minuteswest; /* minutes W of Greenwich */
+    int tz_dsttime;     /* type of dst correction */
+};
+#define _TIMEZONE_DEFINED
+#endif /* _TIMEZONE_DEFINED */
 
 /*
  * Constants used internally by time functions.
  */
+
+#if defined(_MSC_VER) || defined(__BORLANDC__)
+#define EPOCHFILETIME (116444736000000000i64)
+#else
+#define EPOCHFILETIME (116444736000000000LL)
+#endif
 
 /* Epoch base year */
 #define EPOCH_YEAR 1970
@@ -103,7 +117,7 @@ Also, there are 97 leap days in every such 400 years interval
     (((year) % 4) == 0 && (((year) % 100) != 0 || ((year) % 400) == 0))
 
 /*******************************************************************************
-    Time functions
+    time.h functions
 *******************************************************************************/
 
 time_t wceex_time(time_t *timer);
@@ -119,6 +133,11 @@ char * wceex_ctime_r(const time_t *timer, char *buf);
 char * wceex_asctime(const struct tm *tmbuff);
 char * wceex_asctime_r(const struct tm *tbuff, char *buff);
 
+/*******************************************************************************
+    sys/time.h functions
+*******************************************************************************/
+
+int wceex_gettimeofday(struct timeval *tp, struct timezone *tzp);
 
 /*******************************************************************************
     Internal functions prototypes.

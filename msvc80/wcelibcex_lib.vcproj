@@ -669,6 +669,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\wce_gettimeofday.c"
+				>
+			</File>
+			<File
 				RelativePath="..\src\wce_lfind.c"
 				>
 			</File>
@@ -682,6 +686,10 @@
 			</File>
 			<File
 				RelativePath="..\src\wce_mktime.c"
+				>
+			</File>
+			<File
+				RelativePath="..\src\wce_path.c"
 				>
 			</File>
 			<File
@@ -728,6 +736,10 @@
 			>
 			<File
 				RelativePath="..\src\errno.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\fcntl.h"
 				>
 			</File>
 			<File
