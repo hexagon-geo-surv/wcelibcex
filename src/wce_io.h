@@ -40,6 +40,7 @@
 # error "Only Winddows CE target is supported!"
 #endif
 
+#include <windows.h>
 #include <wce_time.h>
 
 #ifdef __cplusplus
@@ -95,6 +96,12 @@ intptr_t wceex_findfirst(const char *filespec, struct _finddata_t *fileinfo);
 int      wceex_findnext(intptr_t handle, struct _finddata_t *fileinfo);
 int      wceex_findclose(intptr_t hFile);
 
+/*******************************************************************************
+    File-access permission functions
+*******************************************************************************/
+
+int wceex_waccess( const wchar_t *path, int mode );
+int wceex_access( const char *path, int mode );
 
 #ifdef __cplusplus
 }
