@@ -1,7 +1,7 @@
 /*
  * $Id: wce_mkdir.c,v 1.3 2006/04/09 16:48:18 mloskot Exp $
  *
- * Defines mkdir() function.
+ * Defines wmkdir, mkdir() functions.
  *
  * Created by Mateusz Loskot (mateusz@loskot.net)
  *
@@ -35,6 +35,7 @@
  */
 
 #include <windows.h>
+#include <wce_errno.h>
 
 /*******************************************************************************
 * wceex_mkdir - Make a directory.
@@ -49,10 +50,8 @@
 *
 *   Upon successful completion, mkdir() shall return 0.
 *   Otherwise, -1 shall be returned, no directory shall be created,
-*   and errno shall be set to indicate the error.
+*   and errno shall be set with the error returned by CreateDirectory.
 *
-*   XXX - mloskot - errno is not set - todo.
-*       
 * Reference:
 *   IEEE 1003.1, 2004 Edition
 *******************************************************************************/
@@ -77,7 +76,37 @@ int wceex_mkdir(const char *filename)
     if (res)
 	    return 0; /* success */
     else
+    {
+        errno = GetLastError();
         return -1;
+    }
 }
 
+/*******************************************************************************
+* wceex_mkdir - Make a directory.
+*
+* Description:
+*
+*   The wmkdir() function shall create a new directory with name path. 
+*   Internally, wmkdir() function wraps CreateDirectory call from 
+*   Windows CE API.
+*
+* Return:
+*
+*   Upon successful completion, wmkdir() shall return 0.
+*   Otherwise, -1 shall be returned, no directory shall be created,
+*   and errno shall be set with the error returned by CreateDirectory.
+*
+* Reference:
+*   IEEE 1003.1, 2004 Edition
+*******************************************************************************/
 
+int wceex_wmkdir( const wchar_t* dirname )
+{
+    if( !CreateDirectory( dirname, NULL ) )
+    {
+        errno = GetLastError();
+        return -1;
+    }
+    return 0;
+}
