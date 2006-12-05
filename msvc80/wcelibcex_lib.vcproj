@@ -641,6 +641,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\wce_access.c"
+				>
+			</File>
+			<File
 				RelativePath="..\src\wce_asctime.c"
 				>
 			</File>
@@ -657,6 +661,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\wce_directorymanagement.c"
+				>
+			</File>
+			<File
 				RelativePath="..\src\wce_errno.c"
 				>
 			</File>
@@ -666,6 +674,10 @@
 			</File>
 			<File
 				RelativePath="..\src\wce_getenv.c"
+				>
+			</File>
+			<File
+				RelativePath="..\src\wce_getopt.c"
 				>
 			</File>
 			<File
@@ -743,6 +755,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\wce_direct.h"
+				>
+			</File>
+			<File
 				RelativePath="..\src\wce_errno.h"
 				>
 			</File>
@@ -780,6 +796,10 @@
 			</File>
 			<File
 				RelativePath="..\src\wce_types.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\wce_unistd.h"
 				>
 			</File>
 		</Filter>
