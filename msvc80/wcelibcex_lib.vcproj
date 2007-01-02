@@ -740,6 +740,10 @@
 				RelativePath="..\src\wce_unlink.c"
 				>
 			</File>
+			<File
+				RelativePath="..\src\wce_winbase.c"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -800,6 +804,10 @@
 			</File>
 			<File
 				RelativePath="..\src\wce_unistd.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\wce_winbase.h"
 				>
 			</File>
 		</Filter>
