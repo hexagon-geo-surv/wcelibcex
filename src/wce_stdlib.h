@@ -40,7 +40,14 @@
 # error "Only Windows CE target is supported!"
 #endif
 
-#include <windows.h>
+/*
+ * Minimal set of required declarations to avoid inclusion of <windows.h>,
+ * because it defines 'LP' type and other which conflict with some libraries,
+ * like PROJ.4.
+ */
+typedef unsigned long DWORD;
+typedef wchar_t *LPWSTR, *PWSTR;
+typedef const wchar_t *LPCWSTR, *PCWSTR;
 
 #define _MAX_DIR   256
 #define _MAX_FNAME 256
