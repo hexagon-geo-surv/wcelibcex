@@ -1,8 +1,9 @@
-Note about WCELIBCEX copyright holders.
+Note about WCELIBCEX files copyright.
 
-Copyright for every file is by its contributor.
+File copyright is held by a file author.
 
-Files created for the first version of the WCELIBCEX project is
+Files created for the first version of the WCELIBCEX project are
 copyrighted by (c) 2006 Taxus SI Ltd., http://www.taxussi.com.pl
 
-See header comment in source files for more details.
+See comment in header of source files for more details.
+See LICENSE.txt for license agreement.
