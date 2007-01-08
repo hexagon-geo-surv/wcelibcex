@@ -38,3 +38,4 @@ Building the library
 3. From the main toolbar, select prefered 'Solution Configuration'
    and 'Solution Platform'
 4. Run Build -> Build Solution
+5. If no errors occured, the library is ready to use

@@ -18,5 +18,5 @@ LICENSE.txt - license agreement
 COPYING.txt - copyright and provenience notice
 BUILD.txt   - building instructions
 
-First version of WCELIBCEX was founded and
-copyrighted by Taxus SI Ltd., http://www.taxussi.com.pl 
+Initial version of WCELIBCEX was founded and copyrighted by Taxus SI Ltd.,
+http://www.taxussi.com.pl 
