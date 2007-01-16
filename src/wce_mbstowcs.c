@@ -48,7 +48,7 @@ wchar_t* wceex_mbstowcs(const char* mbstr)
 	wcsbuf = (wchar_t*)malloc(sizeof(wchar_t) * mbs_size);
     if (NULL != wcsbuf)
     {
-        assert(mbstr != wcsbuf); /* A bit paranoid pre-condition check. */
+        assert((void*)mbstr != (void*)wcsbuf); /* A bit paranoid pre-condition check. */
 
         memset(wcsbuf, 0, sizeof(wchar_t) * mbs_size);
         wcs_size = MultiByteToWideChar(CP_ACP, 0, mbstr, -1, wcsbuf, mbs_size);
