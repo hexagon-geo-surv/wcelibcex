@@ -51,6 +51,10 @@
 #define	X_OK	1		/* Test for execute (search) permission. */
 #define	F_OK	0		/* Test for existence of file. */
 
+/* File accessibility functions. */
+
+int wceex_waccess(const wchar_t *path, int mode);
+int wceex_access(const char *path, int mode);
 
 /*
  * Variables used for communication with getopt() function 
