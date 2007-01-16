@@ -45,6 +45,9 @@
 extern "C" {
 #endif  /* __cplusplus */
 
+/* Redefine CRT functions with new names back to POSIX names. */
+
+#define strdup _strdup
 
 /* Function declarations */
 
