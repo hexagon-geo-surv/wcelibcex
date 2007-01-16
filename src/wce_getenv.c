@@ -32,22 +32,75 @@
 
 
 /*******************************************************************************
-* wceex_getenv - dummy getenv() function
+* wceex_getenv - get value of an environment variable
 *
 * Description:
 *
-*   There is no concept of environment variable in Windows CE operating system.
-*   This function acts as a dummy compilation enabler and ALWAYS returns NULL.
+*   Implements the concept of environment variable for Windows CE platform.
+*   The environment list is based n Windows CE Registry and dedicated subkey,
+*   global for all users of WCELIBCEX library.
 *
 * Return:
 *
-*   The wceex_getenv() function ALWAYS returns NULL.*
+*   Upon successful completion, getenv() shall return a pointer to a string
+*   containing the value for the specified name.
+*   If the specified name cannot be found in the environment,
+*   a null pointer shall be returned.
+*
+*   The return value from getenv() points to global data are released and reallocated
+*   by subsequent calls to getenv().
+*   IMPORTANT: Unline in POSIX, user is allowed and even encouraged to free
+*   returned value manually, by calling free() function.
 *       
 *******************************************************************************/
 
 #include <stdlib.h>
+#include <assert.h>
+#include "wce_stdlib.h"
 
-char* wceex_getenv(const char* varname)
+/*
+ * Global environment buffer.
+ *
+ * TODO: mloskot - Who is supposed to free this value?
+ *       Unlike in POSIX, should we allow/require users to free it?
+ */
+char* _environ = NULL;
+
+
+char* wceex_getenv(const char* name)
 {
-    return NULL;
+    size_t var_size = 0;
+    wchar_t* wcs_value = NULL;
+    wchar_t* wcs_name = NULL;
+    
+    /*
+     * TODO: mloskot - Do we need to check if environment is initialized?
+     * For example, if Registry Key for WCELIBCEX exits, etc.
+     */
+
+    /* Free previously allocated environment value. */
+    free(_environ);
+    _environ = NULL;
+
+    if (NULL != name);
+    {
+        wcs_value = (wchar_t*)malloc(REG_VALUE_SIZE_MAX * sizeof(wchar_t));
+        if (NULL == wcs_value)
+            return NULL;
+
+        wcs_name = wceex_mbstowcs(name);
+
+        /* Get environment from the Windows CE registry. */
+        var_size = wceex_GetEnvironmentVariable(wcs_name, wcs_value, REG_VALUE_SIZE_MAX);
+        if (0 != var_size)
+        {
+            /* Assign new value fetched from the registry. */
+            _environ = wceex_wcstombs(wcs_value);
+        }
+
+        free(wcs_value);
+        free(wcs_name);
+    }
+
+    return _environ;
 }

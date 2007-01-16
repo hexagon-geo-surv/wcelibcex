@@ -45,6 +45,7 @@
  * because it defines 'LP' type and other which conflict with some libraries,
  * like PROJ.4.
  */
+typedef int BOOL;
 typedef unsigned long DWORD;
 typedef wchar_t *LPWSTR, *PWSTR;
 typedef const wchar_t *LPCWSTR, *PCWSTR;
@@ -53,16 +54,58 @@ typedef const wchar_t *LPCWSTR, *PCWSTR;
 #define _MAX_FNAME 256
 #define _MAX_EXT   256
 
+/*
+ * Sizes for buffers used by the getenv/putenv family of functions.
+ */
+
+
+
+/*
+ * Windows CE environment and registry limits.
+ */
+
+/* The maximum length of a value name, NULL character not included. */
+#define REG_VALUE_NAME_SIZE_MAX     255
+
+/* The maximum size of data allowed in Windows CE is 4 KB. */
+#define REG_VALUE_SIZE_MAX          4096
+
+/* Size for buffers used by the getenv/putenv functions.
+ * NOTE: On Windows NT, _MAX_ENV value is 32767, but on Windows CE
+ *       we decied to make it much lower on Windows CE, see value above.
+ */
+#define _MAX_ENV    REG_VALUE_SIZE_MAX
+
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif  /* __cplusplus */
 
+/*
+ * Characters conversion helper functions.
+ *
+ * NOTE: These functions do not replace: wcstombs and mbstowcs
+ *       already available on Windows CE.
+ *       Functions wceex_wcstombs and wceex_mbstowcs are simple
+ *       wrappers on WideCharToMultiByte and MultiByteToWideChar,
+ *       accordingly.
+ */
 
-/* Generate an abnormal process abort. */
+char* wceex_wcstombs(const wchar_t* wcstr);
+wchar_t* wceex_mbstowcs(const char* mbstr);
+
+
+/*
+ * Abnormal process termination.
+ */
 
 void wceex_abort(void);
 
-/* Searching and sorting utilities. */
+
+/*
+ * Searching and sorting utilities
+ */
 
 void* wceex_bsearch(const void *key, const void *base, size_t nmemb, size_t size,
                     int (*compar)(const void *, const void *));
@@ -70,7 +113,10 @@ void* wceex_bsearch(const void *key, const void *base, size_t nmemb, size_t size
 void* wceex_lfind(const void *key, const void *base, size_t *nmemb, size_t size,
                  int(*compar)(const void *, const void *));
 
-/* File Management Functions */
+
+/*
+ * File system mangement functions
+ */
 
 void wceex_splitpath( const char *path, 
                       char *drive, char *dir, char *name, char *ext );
@@ -90,9 +136,25 @@ wchar_t* wceex_wfullpath( wchar_t *absPath, const wchar_t *relPath, size_t maxLe
 DWORD wceex_GetFullPathNameW( LPCWSTR lpFileName, DWORD nBufferLength, 
                               LPWSTR lpBuffer, LPWSTR *lpFilePart );
 
-/* Dummy compilation enablers - functions that do not provide any implementation. */
+/*
+ * Environment variables management funcitons
+ *
+ * NOTE: On Windows CE there is no environment variables support.
+ *       WCELIBCEX implements it based on the Windows Registry keys.
+ *       There is a common registry subkey. The subkey stores each environment
+ *       variable as a single value entry.
+ * IMPORTANT: There is NO support of environment per process,
+ *            but the environment is global!
+ */
 
 char* wceex_getenv(const char* varname); 
+
+/* Implements GetEnvironmentVariable function from Windows NT API. */
+BOOL wceex_SetEnvironmentVariable(LPCWSTR lpName, LPCWSTR lpValue);
+
+/* Implements SetEnvironmentVariable function from Windows NT API. */
+DWORD wceex_GetEnvironmentVariable(LPCWSTR lpName, LPWSTR lpBuffer, DWORD nSize);
+
 
 #ifdef __cplusplus
 }
