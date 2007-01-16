@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="8,00"
 	Name="wcelibcex_lib"
 	ProjectGUID="{55190080-FEA8-4B07-83E1-A26E6937982A}"
 	Keyword="Win32Proj"
@@ -677,6 +677,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\wce_getenvironmentvariable.c"
+				>
+			</File>
+			<File
 				RelativePath="..\src\wce_getopt.c"
 				>
 			</File>
@@ -690,6 +694,10 @@
 			</File>
 			<File
 				RelativePath="..\src\wce_localtime.c"
+				>
+			</File>
+			<File
+				RelativePath="..\src\wce_mbstowcs.c"
 				>
 			</File>
 			<File
@@ -717,6 +725,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\wce_setenvironmentvariable.c"
+				>
+			</File>
+			<File
 				RelativePath="..\src\wce_setlocale.c"
 				>
 			</File>
@@ -738,6 +750,10 @@
 			</File>
 			<File
 				RelativePath="..\src\wce_unlink.c"
+				>
+			</File>
+			<File
+				RelativePath="..\src\wce_wcstombs.c"
 				>
 			</File>
 			<File
