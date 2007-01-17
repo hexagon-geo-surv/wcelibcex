@@ -1,5 +1,5 @@
 /* 
- * $Id: wce_stdio.h,v 1.2 2006/04/09 16:48:18 mloskot Exp $
+ * $Id$
  *
  * stdio.h - standard buffered input/output
  *

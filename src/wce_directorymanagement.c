@@ -1,5 +1,5 @@
 /*
- * $Id: wce_directorymanagement.c,v 1.0 2006/11/29 17:00:28 stephaned Exp $
+ * $Id$
  *
  * Defines _getcwd(), GetCurrentDirectoryW() _wgetcwd(), 
  *         _chdir(), _wchdir functions.

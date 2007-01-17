@@ -1,5 +1,5 @@
 /*
- * $Id: wce_mktime.c,v 1.2 2006/04/09 16:48:18 mloskot Exp $
+ * $Id$
  *
  * Defines functions to convert struct tm to time_t value.
  *

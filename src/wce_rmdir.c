@@ -1,5 +1,5 @@
 /*
- * $Id: wce_rmdir.c,v 1.3 2006/04/09 16:48:18 mloskot Exp $
+ * $Id$
  *
  * Defines rmdir() function.
  *

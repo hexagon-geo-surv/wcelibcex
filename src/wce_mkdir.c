@@ -1,5 +1,5 @@
 /*
- * $Id: wce_mkdir.c,v 1.3 2006/04/09 16:48:18 mloskot Exp $
+ * $Id$
  *
  * Defines wmkdir, mkdir() functions.
  *

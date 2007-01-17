@@ -1,5 +1,5 @@
 /*
- * $Id: wce_io.h,v 1.2 2006/04/09 16:48:18 mloskot Exp $
+ * $Id$
  *
  * io.h - file handling functions
  *

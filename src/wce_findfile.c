@@ -1,5 +1,5 @@
 /*
- * $Id: wce_findfile.c,v 1.2 2006/04/09 16:48:18 mloskot Exp $
+ * $Id$
  *
  * Defines functions to find files.
  *

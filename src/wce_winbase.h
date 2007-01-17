@@ -1,5 +1,5 @@
 /*
- * $Id: wce_winbase.h,v 1.0 2006/04/12 15:11:36 sdunand Exp $
+ * $Id$
  *
  * Created by Stéphane Dunand (sdunand@sirap.fr)
  *

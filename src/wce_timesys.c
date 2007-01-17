@@ -1,5 +1,5 @@
 /*
- * $Id: wce_timesys.c,v 1.2 2006/04/09 16:48:18 mloskot Exp $
+ * $Id$
  *
  *  Defines function to convert time between formats SYSTEMTIME,
  *  FILETIME and time_t value.

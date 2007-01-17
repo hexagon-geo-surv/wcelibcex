@@ -1,5 +1,5 @@
 /*
- * $Id: wce_errno.c,v 1.1 2006/02/19 22:04:53 mloskot Exp $
+ * $Id$
  *
  * Global errno variable.
  *

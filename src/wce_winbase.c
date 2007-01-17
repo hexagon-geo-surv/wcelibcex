@@ -1,5 +1,5 @@
 /*
- * $Id: wce_winbase.c,v 1.0 2006/11/29 17:00:28 sdunand Exp $
+ * $Id$
  *
  * Defines GetStdHandle() function with dummy implementation.
  *

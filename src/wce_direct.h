@@ -1,5 +1,5 @@
 /*
- * $Id: wce_direct.h,v 1.0 2006/11/29 16:38:05 stephaned Exp $
+ * $Id$
  *
  * Created by Stéphane Dunand (sdunand@sirap.fr)
  *
