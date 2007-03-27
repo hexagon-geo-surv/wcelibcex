@@ -36,3 +36,10 @@ HANDLE GetStdHandle( DWORD nStdHandle )
 {
 	return NULL;
 }
+
+LPWSTR wceex_lstrcpyn( LPWSTR lpString1, LPCWSTR lpString2, int iMaxLength )
+{
+    lpString1[0] = '\0';
+    wcsncat( lpString1, lpString2, iMaxLength - 1 );
+    return lpString1;
+}
