@@ -30,9 +30,10 @@
  *
  */
 
-#include <wce_io.h>
-#include <wce_errno.h>
+#include <windows.h>
 #include <shellapi.h>
+#include <wce_unistd.h>
+#include <wce_errno.h>
 
 /*******************************************************************************
 * wceex_waccess - Determine file-access permission
