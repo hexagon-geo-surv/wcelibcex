@@ -47,11 +47,15 @@ extern "C" {
 
 /* Redefine CRT functions with new names back to POSIX names. */
 
-#define strdup _strdup
+#define strdup   _strdup
+#define stricmp  _stricmp
+#define strnicmp _strnicmp
 
 /* Function declarations */
 
 char * wceex_strerror(int errnum);
+
+LPWSTR wceex_lstrcpyn( LPWSTR lpString1, LPCWSTR lpString2, int iMaxLength );
 
 
 #ifdef __cplusplus
