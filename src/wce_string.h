@@ -40,6 +40,7 @@
 # error "Only Winddows CE target is supported!"
 #endif
 
+#include <winbase.h>
 
 #ifdef __cplusplus
 extern "C" {
