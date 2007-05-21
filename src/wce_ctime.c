@@ -98,3 +98,30 @@ char * wceex_ctime_r(const time_t *timer, char *buf)
   return NULL;
 }
 
+/*******************************************************************************
+* wceex_wctime - Convert a time value to a date and time wide string
+*
+* Description:
+*
+*   The ctime function is similar to asctime, except that you specify
+*   the calendar time argument as a time_t simple time value rather
+*   than in broken-down local time format.
+*   It shall be equivalent to: _wasctime(localtime(clock))
+*
+*   The _wctime() is not required to be thread-safe.
+*
+*   Windows CE specific:
+*       _wctime does not set the variable tzname.
+*
+* Reference:
+*
+*   IEEE Std 1003.1-2001
+*   The GNU C Library Manual
+* 
+*******************************************************************************/
+wchar_t * wceex_wctime(const time_t *timer)
+{
+   return wceex_wasctime(wceex_localtime(timer));
+}
+
+

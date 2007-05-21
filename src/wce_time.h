@@ -40,6 +40,8 @@
 # error "Only Winddows CE target is supported!"
 #endif
 
+#include <wchar.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif  /* __cplusplus */
@@ -77,6 +79,20 @@ struct timezone
 };
 #define _TIMEZONE_DEFINED
 #endif /* _TIMEZONE_DEFINED */
+
+/*
+ * Generic-text routine mappings à la Microsoft
+ */
+
+#ifdef _UNICODE
+#define wceex_tctime				wceex_wctime
+#define wceex_tasctime				wceex_wasctime
+#define wceex_tasctime_r			wceex_wasctime_r
+#else
+#define wceex_tctime				wceex_ctime
+#define wceex_tasctime				wceex_asctime
+#define wceex_tasctime_r			wceex_asctime_r
+#endif
 
 /*
  * Constants used internally by time functions.
@@ -128,11 +144,16 @@ struct tm * wceex_localtime(const time_t *timer);
 struct tm * wceex_gmtime(const time_t *timer);
 
 char * wceex_ctime(const time_t *timer);
+/// not implemented yet
 char * wceex_ctime_r(const time_t *timer, char *buf);
+wchar_t * wceex_wctime(const time_t *timer);
+// not implemented yet
+//wchar_t * wceex_wctime_r(const time_t *timer, wchar_t *buf);
 
 char * wceex_asctime(const struct tm *tmbuff);
 char * wceex_asctime_r(const struct tm *tbuff, char *buff);
-
+wchar_t * wceex_wasctime(const struct tm *tmbuff);
+wchar_t * wceex_wasctime_r(const struct tm *tmbuff, wchar_t *buff);
 /*******************************************************************************
     sys/time.h functions
 *******************************************************************************/
@@ -153,4 +174,5 @@ extern time_t __wceex_mktime_utc(struct tm *tmbuff);
 #endif  /* __cplusplus */
 
 #endif /* #ifndef WCEEX_TIME_H */
+
 

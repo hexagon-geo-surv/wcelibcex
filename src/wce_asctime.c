@@ -50,6 +50,12 @@ static char __wce_asc_result[TIME_STRING_SIZE];
 /* Format of string returned. */
 static const char __wce_asc_format[] = "%.3s %.3s %02d %.2d:%.2d:%.2d %d\n"; 
 
+/* Buffer to store wide string representation of tm struct. */
+static wchar_t __wce_wasc_result[TIME_STRING_SIZE];
+
+/* Format of wide string returned. */
+static const wchar_t __wce_wasc_format[] = L"%.3s %.3s %02d %.2d:%.2d:%.2d %d\n"; 
+
 
 /*******************************************************************************
 * wceex_asctime - Convert date and time to a string
@@ -106,10 +112,10 @@ char * wceex_asctime(const struct tm *tmbuff)
 char * wceex_asctime_r(const struct tm *tmbuff, char *buff) 
 {
     int res;
-    static char wday_short[7][3] = {
+    static char wday_short[7][4] = {
         "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
     };
-    static char mon_short[12][3] = {
+    static char mon_short[12][4] = {
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     };
@@ -135,4 +141,85 @@ char * wceex_asctime_r(const struct tm *tmbuff, char *buff)
     else
         return buff;
 }
+
+/*******************************************************************************
+* wceex_wasctime - Convert date and time to a string
+*
+* Description:
+*
+*   The asctime function converts the broken-down time value that
+*   brokentime points to into a string in a standard format:
+*       "Mon Jan 30 13:46:22 2006\n"
+*
+*   The abbreviations for the days of week are:
+*   Sun, Mon, Tue, Wed, Thu, Fri, and Sat.
+*
+*   The abbreviations for the months are:
+*   Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, and Dec. 
+*
+*   The asctime() is not required to be thread-safe.
+*
+* Reference:
+*
+*   IEEE Std 1003.1-2001
+*   The GNU C Library Manual
+* 
+*******************************************************************************/
+wchar_t * wceex_wasctime(const struct tm *tmbuff)
+{
+    return wceex_wasctime_r(tmbuff, __wce_wasc_result);
+}
+
+/*******************************************************************************
+* wceex_wasctime_r - Convert date and time to a wide character string
+*
+* Description:
+*
+*   This function is similar to _wasctime but instead of placing the result
+*   in a static buffer it writes the string in the buffer pointed to by
+*   the parameter buffer. This buffer should have room for at least 26 wide 
+*	characters, including the terminating wide null character.
+*
+*   The _wasctime_r() is not required to be thread-safe.
+*
+* Return value:
+*
+*   Upon success the function returns a pointer to the string the result was 
+*	written into.
+*   Otherwise return NULL.
+*
+*******************************************************************************/
+wchar_t * wceex_wasctime_r(const struct tm *tmbuff, wchar_t *buff) 
+{
+    int res;
+    static wchar_t wday_short[7][4] = {
+        L"Sun", L"Mon", L"Tue", L"Wed", L"Thu", L"Fri", L"Sat"
+    };
+    static wchar_t mon_short[12][4] = {
+        L"Jan", L"Feb", L"Mar", L"Apr", L"May", L"Jun",
+        L"Jul", L"Aug", L"Sep", L"Oct", L"Nov", L"Dec"
+    };
+ 
+    if (tmbuff == NULL)
+    {
+        // \todo XXX - mloskot - set errno with EINVAL
+        return NULL;
+    }
+
+    /* Format: "%.3s %.3s%3d %.2d:%.2d:%.2d %d\n" */
+    res = swprintf(buff, __wce_wasc_format,
+                        wday_short[tmbuff->tm_wday],
+                        mon_short[tmbuff->tm_mon],
+                        tmbuff->tm_mday,
+                        tmbuff->tm_hour,
+                        tmbuff->tm_min,
+                        tmbuff->tm_sec,
+                        1900 + tmbuff->tm_year);
+
+    if (res < 0)
+        return NULL;
+    else
+        return buff;
+}
+
 
