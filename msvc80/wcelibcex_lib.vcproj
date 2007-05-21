@@ -19,6 +19,9 @@
 		<Platform
 			Name="Windows Mobile 5.0 Smartphone SDK (ARMV4I)"
 		/>
+		<Platform
+			Name="DA05 SDK (ARMV4I)"
+		/>
 	</Platforms>
 	<ToolFiles>
 	</ToolFiles>
@@ -244,7 +247,7 @@
 			/>
 			<DeploymentTool
 				ForceDirty="-1"
-				RemoteDirectory=""
+				RemoteDirectory="%CSIDL_PROGRAM_FILES%\curl"
 				RegisterOutput="0"
 				AdditionalFiles=""
 			/>
@@ -574,6 +577,159 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="2"
+				AdditionalIncludeDirectories="$(WCELIBCEX_DIR)"
+				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;_LIB;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE"
+				RuntimeLibrary="0"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES)"
+				Culture="1033"
+				AdditionalIncludeDirectories="$(IntDir)"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions=" /subsystem:windowsce,5.01"
+				OutputFile="$(OutDir)/wcelibcex.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|DA05 SDK (ARMV4I)"
+			OutputDirectory="DA05 SDK (ARMV4I)\$(ConfigurationName)"
+			IntermediateDirectory="DA05 SDK (ARMV4I)\$(ConfigurationName)"
+			ConfigurationType="4"
+			InheritedPropertySheets=".\wcelibcex.vsprops"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="1"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(WCELIBCEX_DIR)"
+				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;_LIB;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE"
+				MinimalRebuild="true"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES)"
+				Culture="1033"
+				AdditionalIncludeDirectories="$(IntDir)"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions=" /subsystem:windowsce,5.01"
+				OutputFile="$(OutDir)/wcelibcexd.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|DA05 SDK (ARMV4I)"
+			OutputDirectory="DA05 SDK (ARMV4I)\$(ConfigurationName)"
+			IntermediateDirectory="DA05 SDK (ARMV4I)\$(ConfigurationName)"
+			ConfigurationType="4"
+			InheritedPropertySheets=".\wcelibcex.vsprops"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="1"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
