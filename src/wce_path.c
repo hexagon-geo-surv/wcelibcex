@@ -70,7 +70,7 @@ void wceex_splitpath( const char *path,
     {
         if( dir )
         {
-            size_t count = (bslash - path);
+            size_t count = (bslash - path) + 1;
             if( count >= _MAX_DIR )
                 count = _MAX_DIR - 1;
             strncat( dir, path, count );
@@ -129,7 +129,7 @@ void wceex_wsplitpath( const wchar_t *path,
     {
         if( dir )
         {
-            size_t count = (bslash - path) / sizeof(wchar_t);
+            size_t count = (bslash - path) + 1;
             if( count >= _MAX_DIR )
                 count = _MAX_DIR - 1;
             wcsncat( dir, path, count );
