@@ -39,6 +39,9 @@
 /* Defines NULL pointer value */
 #include <stddef.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif  /* __cplusplus */
 
 /*
  * Symbolic constants for second argument to access() function.
@@ -72,5 +75,9 @@ extern int opterr;
 
 /* Character checked for validity */
 extern int optopt;
+
+#ifdef __cplusplus
+}
+#endif  /* __cplusplus */
 
 #endif /* #ifndef WCEEX_UNISTD_H */
