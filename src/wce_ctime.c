@@ -88,8 +88,10 @@ char * wceex_ctime(const time_t *timer)
 *   The GNU C Library Manual
 * 
 *******************************************************************************/
-char * wceex_ctime_r(const time_t *timer, char *buf)
+char * wceex_ctime_r(const time_t * timer, char * buf)
 {
+    (void)timer;
+    (void)buf;
   /*
   XXX - mloskot - it's waiting for localtime_r function.
 

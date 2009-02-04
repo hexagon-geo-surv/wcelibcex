@@ -32,8 +32,10 @@
 
 #include <wce_winbase.h>
 
-HANDLE GetStdHandle( DWORD nStdHandle )
+HANDLE GetStdHandle(DWORD nStdHandle)
 {
+    (void)nStdHandle;
+
 	return NULL;
 }
 
