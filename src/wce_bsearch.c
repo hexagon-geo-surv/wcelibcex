@@ -35,11 +35,14 @@
 #include <wce_types.h>
 
 /*******************************************************************************
-* wceex_bsearch - TODO
+* wceex_bsearch - binary search a sorted table
 *
 * Description:
 *
 * Return:
+*   Returns a pointer to a matching member of the array, or a null pointer
+*   if no match is found. If two or more members compare equal,
+*   which member is returned is unspecified.
 *
 *       
 * Reference:
@@ -59,6 +62,12 @@ void* wceex_bsearch(const void *key, const void *base, size_t num, size_t width,
     assert(base != NULL);
     assert(compare != NULL);
 
+    /* input array is empty */
+    if (num == 0)
+    {
+        return NULL;
+    }
+
     res = 0;
     left = 0;
     right = num - 1;
@@ -67,13 +76,14 @@ void* wceex_bsearch(const void *key, const void *base, size_t num, size_t width,
     {
         middle = (left + right) / 2;
 
-        res = compare(((char*) base + (width * middle)), key);
-        if (res > 0)
+        /* key expected to be first parameter */
+        res = compare(key, ((char*) base + (width * middle)));
+        if (res < 0)
         {
             /* search from middle to left */
             right = middle - 1;
         }
-        else if (res < 0)
+        else if (res > 0)
         {
             /* search from middle to right */
             left = middle + 1;
@@ -88,3 +98,4 @@ void* wceex_bsearch(const void *key, const void *base, size_t num, size_t width,
     /* key not found */
     return NULL;
 }
+
