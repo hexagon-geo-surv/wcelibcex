@@ -33,6 +33,9 @@
  * http://www.taxussi.com.pl
  *
  */
+
+#include <windows.h>
+
 #ifndef WCEEX_STDIO_H
 #define WCEEX_STDIO_H    1
 
@@ -45,6 +48,9 @@
 extern "C" {
 #endif  /* __cplusplus */
 
+#ifndef L_tmpnam
+#define L_tmpnam MAX_PATH
+#endif
 
 /* Functions declarations */
 
@@ -52,6 +58,11 @@ int wceex_rename(const char *oldfile, const char *newfile);
 int wceex_unlink(const char *filename);
 int wceex_wunlink(const wchar_t *filename);
 void wceex_rewind(FILE *stream);
+FILE * wceex_freopen(const char *filename, const char *opentype, FILE *stream);
+UINT wceex_GetTempFileNameA(LPCSTR lpPathName, LPCSTR lpPrefixString, UINT uUnique, LPSTR lpTempFileName);
+DWORD wceex_GetTempPathA(DWORD ccBuffer, LPSTR lpszBuffer);
+FILE * wceex_tmpfile(void);
+char * wceex_tmpnam(char * result);
 
 
 #ifdef __cplusplus
