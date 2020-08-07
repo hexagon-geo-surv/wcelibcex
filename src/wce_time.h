@@ -129,8 +129,8 @@ time_t wceex_time(time_t *timer);
 time_t wceex_mktime(struct tm *tmbuff);
 time_t wceex_gmmktime(struct tm *tmbuff);
 
-struct tm * wceex_localtime(const time_t *timer);
-struct tm * wceex_gmtime(const time_t *timer);
+struct tm * wceex_localtime_r(const time_t *timer, struct tm *tmp);
+struct tm * wceex_gmtime_r(const time_t *timer, struct tm *tmp);
 
 char * wceex_ctime(const time_t *timer);
 char * wceex_ctime_r(const time_t *timer, char *buf);

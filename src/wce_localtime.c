@@ -85,7 +85,7 @@
   Local time functions
 *******************************************************************************/
 
-struct tm * __wceex_offtime(const time_t *timer, long tzoffset);
+struct tm * __wceex_offtime(const time_t *timer, long tzoffset, struct tm *tmp);
 
 /*******************************************************************************
 * wceex_localtime - Convert time_t value to tm struct.
@@ -94,10 +94,8 @@ struct tm * __wceex_offtime(const time_t *timer, long tzoffset);
 *   Use offset as difference in seconds between local time and UTC time.
 *
 *******************************************************************************/
-struct tm * wceex_localtime(const time_t *timer)
+struct tm * wceex_localtime_r(const time_t *timer, struct tm *tmp)
 {
-    register struct tm *tmp;
-
     long tzoffset;
     TIME_ZONE_INFORMATION tzi;
     
@@ -113,9 +111,7 @@ struct tm * wceex_localtime(const time_t *timer)
 	}
     
     tzoffset *= -1;
-    tmp = __wceex_offtime(timer, tzoffset);
-
-    return tmp;
+    return __wceex_offtime(timer, tzoffset, tmp);
 }
 
 /*******************************************************************************
@@ -127,13 +123,9 @@ struct tm * wceex_localtime(const time_t *timer)
 *   rather than relative to a local time zone.
 *
 *******************************************************************************/
-struct tm * wceex_gmtime(const time_t *timer)
+struct tm * wceex_gmtime_r(const time_t *timer, struct tm *tmp)
 {
-    register struct tm *tmp;
-
-    tmp = __wceex_offtime(timer, 0L);
-
-    return tmp;
+    return __wceex_offtime(timer, 0L, tmp);
 }
 
 /*******************************************************************************
@@ -151,18 +143,14 @@ static int	mon_lengths[2][MONS_PER_YEAR] =
 
 static int	year_lengths[2] = { DAYS_PER_NYEAR, DAYS_PER_LYEAR };
 
-
-struct tm * __wceex_offtime(const time_t *timer, long tzoffset)
+struct tm * __wceex_offtime(const time_t *timer, long tzoffset, struct tm *tmp)
 {
-    register struct tm *tmp;
     register __int64	days;
     register long		rem;
     register int		y;
     register int		yleap;
     register int       *ip;
-    static struct tm    tm;
 
-    tmp = &tm;
     days = *timer / SECS_PER_DAY;
     rem = *timer % SECS_PER_DAY;
     rem += tzoffset;

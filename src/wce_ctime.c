@@ -60,7 +60,8 @@
 *******************************************************************************/
 char * wceex_ctime(const time_t *timer)
 {
-   return wceex_asctime(wceex_localtime(timer));
+    struct tm tm;
+    return wceex_asctime(wceex_localtime_r(timer, &tm));
 }
  
 
