@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: wce_setlocale.c 20 2006-11-18 17:00:30Z mloskot $
  *
  * Defines setlocale() function with dummy implementation.
  *

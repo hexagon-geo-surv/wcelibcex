@@ -112,7 +112,10 @@ char* wceex_getcwd( char *buffer, int maxlen )
 
 DWORD wceex_GetCurrentDirectoryW( DWORD nBufferLength, LPWSTR lpBuffer )
 {
-    *lpBuffer = 0;
+    // buffer can be NULL
+    if (lpBuffer)
+        *lpBuffer = 0;
+
     if( InitCwd() )
     {
         SetLastError( errno );
@@ -125,6 +128,66 @@ DWORD wceex_GetCurrentDirectoryW( DWORD nBufferLength, LPWSTR lpBuffer )
             return slen + 1;
         wcscpy( lpBuffer, Cwd );
         return slen;
+    }
+}
+
+/*******************************************************************************
+* wceex_SetCurrentDirectoryW - Set the current working directory
+*
+* Description:
+*
+* Return:
+*
+* Reference:
+*
+*******************************************************************************/
+
+BOOL wceex_SetCurrentDirectoryW( LPCWSTR lpPathName )
+{
+    DWORD ulAttr = 0;
+
+    if (lpPathName == NULL || lpPathName[0] == '\0')
+    {
+        errno = ENOENT;
+        SetLastError(errno);
+        return FALSE;
+    }
+
+    // check if path name is valid
+    ulAttr = GetFileAttributesW(lpPathName);
+
+    if (ulAttr == INVALID_FILE_ATTRIBUTES)
+    {
+        // invalid path
+        errno = GetLastError();
+        return FALSE;
+    }
+
+    if (ulAttr & FILE_ATTRIBUTE_DIRECTORY)
+    {
+        // path points to directory
+        unsigned int i = 0;
+        unsigned int len = wcslen(lpPathName);
+
+        wcscpy(Cwd, lpPathName);
+
+        // convert all '/' to '\\'
+        for (i = 0; i < len; i++)
+        {
+            if (Cwd[i] == '/')
+            {
+                Cwd[i] = '\\';
+            }
+        }
+
+        return TRUE;
+    }
+    else
+    {
+        // path points to file
+        errno = ENOENT;
+        SetLastError(errno);
+        return FALSE;
     }
 }
 

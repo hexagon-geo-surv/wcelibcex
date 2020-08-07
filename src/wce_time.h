@@ -49,9 +49,14 @@ extern "C" {
 *******************************************************************************/
 
 #ifndef _TIME_T_DEFINED
-typedef long    time_t;		/* time value as number of seconds of the Epoch */
+typedef __int64 time_t;		/* time value as number of seconds of the Epoch */
 #define _TIME_T_DEFINED
 #endif /* _TIME_T_DEFINED */
+
+#ifndef _CLOCK_T_DEFINED
+typedef long clock_t;
+#define _CLOCK_T_DEFINED
+#endif
 
 #ifndef _TM_DEFINED
 struct tm
@@ -132,6 +137,8 @@ char * wceex_ctime_r(const time_t *timer, char *buf);
 
 char * wceex_asctime(const struct tm *tmbuff);
 char * wceex_asctime_r(const struct tm *tbuff, char *buff);
+
+clock_t wceex_clock(void);
 
 /*******************************************************************************
     sys/time.h functions

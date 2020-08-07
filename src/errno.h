@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: errno.h 20 2006-11-18 17:00:30Z mloskot $
  *
  * errno.h - system error numbers
  *

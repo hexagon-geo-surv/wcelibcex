@@ -46,13 +46,14 @@ extern "C" {
 #endif  /* __cplusplus */
 
 
-/*
-#if defined(_MT)
-#  error "errno as global variable does not work with multi threads"
-#endif
-*/
-/* XXX - mloskot - make it thread-safe by calling (*_errno()) */
-extern int errno;
+// thread-safe errno implementation
+void wceex_ProcessAttached(void);
+void wceex_ProcessDetached(void);
+void wceex_ThreadAttached(void);
+void wceex_ThreadDetached(void);
+int* wceex_errno(void);
+
+#define errno (*wceex_errno())
 
 
 /* Error Codes */

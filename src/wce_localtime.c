@@ -155,7 +155,7 @@ static int	year_lengths[2] = { DAYS_PER_NYEAR, DAYS_PER_LYEAR };
 struct tm * __wceex_offtime(const time_t *timer, long tzoffset)
 {
     register struct tm *tmp;
-    register long		days;
+    register __int64	days;
     register long		rem;
     register int		y;
     register int		yleap;

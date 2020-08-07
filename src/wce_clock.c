@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: wce_clock.c 20 2006-11-18 17:00:30Z mloskot $
  *
  * Defines clock() function.
  *
@@ -32,6 +32,7 @@
 
 #include <time.h>
 #include <winbase.h>
+#include "wce_time.h"
 
 /*******************************************************************************
 * wceex_clock - report CPU time used

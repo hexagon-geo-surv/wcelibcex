@@ -49,6 +49,7 @@ int wceex_chdir( const char *dirname );
 int wceex_wchdir( const wchar_t *dirname );
 
 DWORD wceex_GetCurrentDirectoryW( DWORD nBufferLength, LPWSTR lpBuffer );
+BOOL wceex_SetCurrentDirectoryW( LPCWSTR lpPathName );
 
 #ifdef __cplusplus
 }

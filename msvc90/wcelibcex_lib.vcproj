@@ -4,15 +4,75 @@
 	Keyword="Win32Proj"
 	ProjectGUID="{55190080-FEA8-4B07-83E1-A26E6937982A}"
 	ProjectType="Visual C++"
-	Version="8.00"
+	RootNamespace="wcelibcex_lib"
+	TargetFrameworkVersion="131072"
+	Version="9.00"
 	>
 	<Platforms>
+		<Platform Name="Stellar_EC7 (ARMv4I)"/>
 		<Platform Name="SuperSonic_CE6 (ARMV4I)"/>
 		<Platform Name="Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"/>
 		<Platform Name="Windows Mobile 5.0 Smartphone SDK (ARMV4I)"/>
 	</Platforms>
 	<ToolFiles/>
 	<Configurations>
+		<Configuration
+			Name="Debug|Stellar_EC7 (ARMv4I)"
+			CharacterSet="1"
+			ConfigurationType="4"
+			InheritedPropertySheets=".\wcelibcex.vsprops"
+			IntermediateDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
+			>
+			<Tool Name="VCALinkTool"/>
+			<Tool Name="VCBscMakeTool"/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories=""
+				AdditionalOptions="/fp:except- /QRarch7 /QRfpe- /arch:VFPv3-D32"
+				DebugInformationFormat="3"
+				DisableSpecificWarnings="4996"
+				ExecutionBucket="7"
+				MinimalRebuild="true"
+				Optimization="0"
+				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;_LIB;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				/>
+			<Tool Name="VCCodeSignTool"/>
+			<Tool Name="VCCustomBuildTool"/>
+			<Tool Name="VCFxCopTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/subsystem:windowsce,7.00 /machine:ARM"
+				OutputFile="$(OutDir)/wcelibcexd.lib"
+				/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="1"
+				/>
+			<Tool Name="VCManagedResourceCompilerTool"/>
+			<Tool Name="VCPostBuildEventTool"/>
+			<Tool Name="VCPreBuildEventTool"/>
+			<Tool Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(IntDir)"
+				Culture="1033"
+				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES)"
+				/>
+			<Tool Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool Name="VCXDCMakeTool"/>
+			<Tool Name="VCXMLDataGeneratorTool"/>
+			<DeploymentTool
+				AdditionalFiles=""
+				ForceDirty="-1"
+				RegisterOutput="0"
+				RemoteDirectory=""
+				/>
+			<DebuggerTool/>
+		</Configuration>
 		<Configuration
 			Name="Debug|SuperSonic_CE6 (ARMV4I)"
 			CharacterSet="1"
@@ -26,21 +86,24 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories=""
+				AdditionalOptions="/fp:except-"
 				CompileForArchitecture="2"
 				DebugInformationFormat="3"
+				DisableSpecificWarnings="4996"
 				ExecutionBucket="7"
 				MinimalRebuild="true"
 				Optimization="0"
 				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;_LIB;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				/>
 			<Tool Name="VCCodeSignTool"/>
 			<Tool Name="VCCustomBuildTool"/>
+			<Tool Name="VCFxCopTool"/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalOptions=" /subsystem:windowsce,4.20 /machine:ARM"
+				AdditionalOptions="/subsystem:windowsce,6.00 /machine:ARM"
 				OutputFile="$(OutDir)/wcelibcexd.lib"
 				/>
 			<Tool
@@ -92,6 +155,7 @@
 				/>
 			<Tool Name="VCCodeSignTool"/>
 			<Tool Name="VCCustomBuildTool"/>
+			<Tool Name="VCFxCopTool"/>
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalOptions=" /subsystem:windowsce,5.01"
@@ -143,6 +207,7 @@
 				/>
 			<Tool Name="VCCodeSignTool"/>
 			<Tool Name="VCCustomBuildTool"/>
+			<Tool Name="VCFxCopTool"/>
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalOptions=" /subsystem:windowsce,5.01"
@@ -171,6 +236,62 @@
 			<DebuggerTool/>
 		</Configuration>
 		<Configuration
+			Name="Release|Stellar_EC7 (ARMv4I)"
+			CharacterSet="1"
+			ConfigurationType="4"
+			InheritedPropertySheets=".\wcelibcex.vsprops"
+			IntermediateDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
+			>
+			<Tool Name="VCALinkTool"/>
+			<Tool Name="VCBscMakeTool"/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories=""
+				AdditionalOptions="/fp:except- /QRarch7 /QRfpe- /arch:VFPv3-D32"
+				DebugInformationFormat="3"
+				DisableSpecificWarnings="4996"
+				ExecutionBucket="7"
+				Optimization="2"
+				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;_LIB;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE"
+				RuntimeLibrary="0"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				/>
+			<Tool Name="VCCodeSignTool"/>
+			<Tool Name="VCCustomBuildTool"/>
+			<Tool Name="VCFxCopTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/subsystem:windowsce,7.00 /machine:ARM"
+				OutputFile="$(OutDir)/wcelibcex.lib"
+				/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="1"
+				/>
+			<Tool Name="VCManagedResourceCompilerTool"/>
+			<Tool Name="VCPostBuildEventTool"/>
+			<Tool Name="VCPreBuildEventTool"/>
+			<Tool Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(IntDir)"
+				Culture="1033"
+				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES)"
+				/>
+			<Tool Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool Name="VCXDCMakeTool"/>
+			<Tool Name="VCXMLDataGeneratorTool"/>
+			<DeploymentTool
+				AdditionalFiles=""
+				ForceDirty="-1"
+				RegisterOutput="0"
+				RemoteDirectory=""
+				/>
+			<DebuggerTool/>
+		</Configuration>
+		<Configuration
 			Name="Release|SuperSonic_CE6 (ARMV4I)"
 			CharacterSet="1"
 			ConfigurationType="4"
@@ -183,20 +304,23 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories=""
+				AdditionalOptions="/fp:except-"
 				CompileForArchitecture="2"
 				DebugInformationFormat="3"
+				DisableSpecificWarnings="4996"
 				ExecutionBucket="7"
 				Optimization="2"
 				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;_LIB;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE"
-				RuntimeLibrary="0"
+				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				/>
 			<Tool Name="VCCodeSignTool"/>
 			<Tool Name="VCCustomBuildTool"/>
+			<Tool Name="VCFxCopTool"/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalOptions=" /subsystem:windowsce,4.20 /machine:ARM"
+				AdditionalOptions="/subsystem:windowsce,6.00 /machine:ARM"
 				OutputFile="$(OutDir)/wcelibcex.lib"
 				/>
 			<Tool
@@ -247,6 +371,7 @@
 				/>
 			<Tool Name="VCCodeSignTool"/>
 			<Tool Name="VCCustomBuildTool"/>
+			<Tool Name="VCFxCopTool"/>
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalOptions=" /subsystem:windowsce,5.01"
@@ -297,6 +422,7 @@
 				/>
 			<Tool Name="VCCodeSignTool"/>
 			<Tool Name="VCCustomBuildTool"/>
+			<Tool Name="VCFxCopTool"/>
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalOptions=" /subsystem:windowsce,5.01"

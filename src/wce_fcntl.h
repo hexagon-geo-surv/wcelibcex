@@ -1,5 +1,5 @@
 /* 
- * $Id$
+ * $Id: wce_fcntl.h 20 2006-11-18 17:00:30Z mloskot $
  *
  * fcntl.h - file control options
  *
