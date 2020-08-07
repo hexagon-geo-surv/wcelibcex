@@ -73,7 +73,8 @@ clock_t wceex_clock()
     
     if (SystemTimeToFileTime(&stCurrent, &ftCurrent))
     {
-        ticks = *(__int64*)&ftCurrent;
+        // convert from 100ns to s*CLOCKS_PER_SEC
+        ticks = *(__int64*)&ftCurrent / (10000000 / CLOCKS_PER_SEC);
     }
     else
     {
