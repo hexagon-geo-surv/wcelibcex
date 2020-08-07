@@ -49,8 +49,9 @@ extern "C" {
 // thread-safe errno implementation
 int* wceex_errno(void);
 
+#ifndef errno
 #define errno (*wceex_errno())
-
+#endif
 
 /* Error Codes */
 
