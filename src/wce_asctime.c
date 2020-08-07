@@ -34,7 +34,7 @@
  *
  */
 
-#include <wce_time.h>
+#include "wce_time.h"
 #include <stdlib.h>
 #include "wce_errno.h"
 #include "wce_mtdll.h"
@@ -76,10 +76,12 @@ char * wceex_asctime(const struct tm *tmbuff)
 
     // thread safe implementation with TLS
     _ptiddata ptd = getptd();
-    if (ptd)
+    if (ptd == NULL || ptd->_asctimebuf == NULL)
     {
-        asctimebuf = ptd->_asctimebuf;
+        errno = ENOMEM;
+        return NULL;
     }
+    asctimebuf = ptd->_asctimebuf;
 
     return wceex_asctime_r(tmbuff, asctimebuf);
 }
@@ -125,7 +127,8 @@ char * wceex_asctime_r(const struct tm *tmbuff, char *buff)
         31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
     };
 
-    if (tmbuff == NULL
+    if (buff == NULL
+     || tmbuff == NULL
      || tmbuff->tm_year < 0
      || tmbuff->tm_mon < TM_MONTH_MIN || tmbuff->tm_mon > TM_MONTH_MAX
      || tmbuff->tm_hour < 0 || tmbuff->tm_hour > 23

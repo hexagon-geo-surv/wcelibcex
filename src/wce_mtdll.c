@@ -20,6 +20,7 @@
 #include <malloc.h>
 #include <winbase.h>
 #include <assert.h>
+#include "wce_time.h"
 
 // ====================================================================================================================
 // =================================================   Declarations   =================================================
@@ -44,6 +45,7 @@ _ptiddata createTiddata(void)
     {
         ptd->_terrno = 0;
         ptd->_asctimebuf = (char*)malloc(ASCTIMEBUF_SIZE); // TODO lazy initialization?
+        ptd->_gmtimebuf = (void*)malloc(sizeof(struct tm));
     }
     return ptd;
 }
@@ -54,6 +56,7 @@ void deleteTiddata(_ptiddata ptd)
 {
     if (ptd != NULL)
     {
+        free(ptd->_gmtimebuf);
         free(ptd->_asctimebuf);
     }
     free(ptd);
@@ -110,8 +113,6 @@ void wceex_ThreadAttached(void)
 
     success = TlsSetValue(s_tlsIndexPtd, ptd);
     assert(success);
-
-    getptd();
 }
 
 // --------------------------------------------------------------------------------------------------------------------

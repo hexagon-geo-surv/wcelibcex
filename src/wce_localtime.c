@@ -34,9 +34,11 @@
  *
  */
 
-#include <wce_time.h>
+#include "wce_time.h"
 #include <stdlib.h>
 #include <windows.h>
+#include "wce_mtdll.h"
+#include "wce_errno.h"
 
 /*******************************************************************************
   Constants and macros used internally
@@ -72,11 +74,7 @@
 #define TM_OCTOBER	9
 #define TM_NOVEBER	10
 #define TM_DECEMBER	11
-#define TM_SUNDAY	0
 
-#define TM_YEAR_BASE	1900
-
-#define EPOCH_YEAR	1970
 #define EPOCH_WDAY	TM_THURSDAY
 
 #define isleap(y) (((y) % 4) == 0 && ((y) % 100) != 0 || ((y) % 400) == 0)
@@ -94,6 +92,22 @@ struct tm * __wceex_offtime(const time_t *timer, long tzoffset, struct tm *tmp);
 *   Use offset as difference in seconds between local time and UTC time.
 *
 *******************************************************************************/
+struct tm * wceex_localtime(const time_t *timer)
+{
+    struct tm* gmtimebuf = NULL;
+
+    // thread safe implementation with TLS
+    _ptiddata ptd = getptd();
+    if (ptd == NULL || ptd->_gmtimebuf == NULL)
+    {
+        errno = ENOMEM;
+        return NULL;
+    }
+    gmtimebuf = ptd->_gmtimebuf;
+
+    return wceex_localtime_r(timer, gmtimebuf);
+}
+
 struct tm * wceex_localtime_r(const time_t *timer, struct tm *tmp)
 {
     long tzoffset;
@@ -123,6 +137,22 @@ struct tm * wceex_localtime_r(const time_t *timer, struct tm *tmp)
 *   rather than relative to a local time zone.
 *
 *******************************************************************************/
+struct tm * wceex_gmtime(const time_t *timer)
+{
+    struct tm* gmtimebuf = NULL;
+
+    // thread safe implementation with TLS
+    _ptiddata ptd = getptd();
+    if (ptd == NULL || ptd->_gmtimebuf == NULL)
+    {
+        errno = ENOMEM;
+        return NULL;
+    }
+    gmtimebuf = ptd->_gmtimebuf;
+
+    return wceex_gmtime_r(timer, gmtimebuf);
+}
+
 struct tm * wceex_gmtime_r(const time_t *timer, struct tm *tmp)
 {
     return __wceex_offtime(timer, 0L, tmp);

@@ -23,6 +23,7 @@ struct _tiddata
 {
     int _terrno;                /* errno value */
     char* _asctimebuf;          /* ptr to asctime() buffer */
+    void* _gmtimebuf;           /* ptr to gmtime() structure */
 };
 
 typedef struct _tiddata* _ptiddata;
