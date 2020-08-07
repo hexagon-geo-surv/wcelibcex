@@ -36,16 +36,12 @@
 
 #include <wce_time.h>
 #include <stdlib.h>
+#include "wce_errno.h"
+#include "wce_mtdll.h"
 
 /*******************************************************************************
 * Internal definitions
 *******************************************************************************/
-
-/* Buffer to store string representation of tm struct. */
-#define TIME_STRING_SIZE    26
-
-/* Buffer to store string representation of tm struct. */
-static char __wce_asc_result[TIME_STRING_SIZE];
 
 /* Format of string returned. */
 static const char __wce_asc_format[] = "%.3s %.3s %02d %.2d:%.2d:%.2d %d\n"; 
@@ -76,7 +72,16 @@ static const char __wce_asc_format[] = "%.3s %.3s %02d %.2d:%.2d:%.2d %d\n";
 *******************************************************************************/
 char * wceex_asctime(const struct tm *tmbuff)
 {
-    return wceex_asctime_r(tmbuff, __wce_asc_result);
+    char* asctimebuf = NULL;
+
+    // thread safe implementation with TLS
+    _ptiddata ptd = getptd();
+    if (ptd)
+    {
+        asctimebuf = ptd->_asctimebuf;
+    }
+
+    return wceex_asctime_r(tmbuff, asctimebuf);
 }
 
 
@@ -106,17 +111,30 @@ char * wceex_asctime(const struct tm *tmbuff)
 char * wceex_asctime_r(const struct tm *tmbuff, char *buff) 
 {
     int res;
-    static char wday_short[7][3] = {
+    static const char wday_short[7][3] = {
         "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
     };
-    static char mon_short[12][3] = {
+    static const char mon_short[12][3] = {
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     };
  
-    if (tmbuff == NULL)
+    static const int mon_lengths[2][12] =
     {
-        // XXX - mloskot - set errno with EINVAL
+        31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
+        31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+    };
+
+    if (tmbuff == NULL
+     || tmbuff->tm_year < 0
+     || tmbuff->tm_mon < TM_MONTH_MIN || tmbuff->tm_mon > TM_MONTH_MAX
+     || tmbuff->tm_hour < 0 || tmbuff->tm_hour > 23
+     || tmbuff->tm_min < 0 || tmbuff->tm_min > 59
+     || tmbuff->tm_sec < 0 || tmbuff->tm_sec > 59
+     || tmbuff->tm_mday < 1 || tmbuff->tm_mday > mon_lengths[IS_LEAP_YEAR(tmbuff->tm_year + TM_YEAR_BASE)][tmbuff->tm_mon]
+     || tmbuff->tm_wday < 0 || tmbuff->tm_wday > 6)
+    {
+        errno = EINVAL;
         return NULL;
     }
 

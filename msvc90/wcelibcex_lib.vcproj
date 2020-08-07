@@ -464,6 +464,7 @@
 			<File RelativePath="..\src\wce_errno.h"/>
 			<File RelativePath="..\src\wce_fcntl.h"/>
 			<File RelativePath="..\src\wce_io.h"/>
+			<File RelativePath="..\src\wce_mtdll.h"/>
 			<File RelativePath="..\src\wce_stat.h"/>
 			<File RelativePath="..\src\wce_stdio.h"/>
 			<File RelativePath="..\src\wce_stdlib.h"/>
@@ -495,6 +496,7 @@
 			<File RelativePath="..\src\wce_localtime.c"/>
 			<File RelativePath="..\src\wce_mkdir.c"/>
 			<File RelativePath="..\src\wce_mktime.c"/>
+			<File RelativePath="..\src\wce_mtdll.c"/>
 			<File RelativePath="..\src\wce_path.c"/>
 			<File RelativePath="..\src\wce_rename.c"/>
 			<File RelativePath="..\src\wce_rewind.c"/>

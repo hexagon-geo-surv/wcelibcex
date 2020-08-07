@@ -47,10 +47,6 @@ extern "C" {
 
 
 // thread-safe errno implementation
-void wceex_ProcessAttached(void);
-void wceex_ProcessDetached(void);
-void wceex_ThreadAttached(void);
-void wceex_ThreadDetached(void);
 int* wceex_errno(void);
 
 #define errno (*wceex_errno())

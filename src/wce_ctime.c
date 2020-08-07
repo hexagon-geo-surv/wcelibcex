@@ -91,11 +91,7 @@ char * wceex_ctime(const time_t *timer)
 *******************************************************************************/
 char * wceex_ctime_r(const time_t *timer, char *buf)
 {
-  /*
-  XXX - mloskot - it's waiting for localtime_r function.
-
-  ({ struct tm tm; asctime_r (localtime_r (time, &tm), buf); })
-  */
-  return NULL;
+    struct tm tm;
+    return wceex_asctime_r(wceex_localtime_r(timer, &tm), buf);
 }
 

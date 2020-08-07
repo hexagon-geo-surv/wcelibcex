@@ -36,96 +36,9 @@
 
 #include <winbase.h>
 #include "wce_errno.h"
+#include "wce_mtdll.h"
 
-#define INVALID_TLS_INDEX 0xFFFFFFFF
-
-static int s_lTlsIndexErrno = INVALID_TLS_INDEX;
 static int s_lErrnoNoMem = ENOMEM;
-
-/*******************************************************************************
-* wceex_ProcessAttached
-*
-* Description: allocate the TLS index for errno and initialize errno for main
-*              thread
-*
-* Return:
-*
-* Reference:
-*
-*******************************************************************************/
-void wceex_ProcessAttached(void)
-{
-    if (s_lTlsIndexErrno == INVALID_TLS_INDEX)
-    {
-        s_lTlsIndexErrno = TlsAlloc();
-
-        if (s_lTlsIndexErrno == INVALID_TLS_INDEX)
-        {
-            ExitProcess(3);
-        }
-    }
-
-    // attach main thread
-    wceex_ThreadAttached();
-}
-
-/*******************************************************************************
-* wceex_ProcessDetached
-*
-* Description: cleanup errno for main thread and free TLS index for errno
-*
-* Return:
-*
-* Reference:
-*
-*******************************************************************************/
-void wceex_ProcessDetached(void)
-{
-    // detach main thread
-    wceex_ThreadDetached();
-
-    TlsFree(s_lTlsIndexErrno);
-}
-
-/*******************************************************************************
-* wceex_ThreadAttached
-*
-* Description: allocate and initialize errno for new thread
-*
-* Return:
-*
-* Reference:
-*
-*******************************************************************************/
-void wceex_ThreadAttached(void)
-{
-    // allocate and initialize errno
-    int* pErrno = (int*)malloc(sizeof(int));
-
-    if (pErrno == 0)
-    {
-        ExitProcess(3);
-    }
-
-    *pErrno = 0;
-    TlsSetValue(s_lTlsIndexErrno, pErrno);
-}
-
-/*******************************************************************************
-* wceex_ThreadDetached
-*
-* Description: free errno for this thread
-*
-* Return:
-*
-* Reference:
-*
-*******************************************************************************/
-void wceex_ThreadDetached(void)
-{
-    // free errno
-    free (TlsGetValue(s_lTlsIndexErrno));
-}
 
 /*******************************************************************************
 * wceex_errno
@@ -139,14 +52,15 @@ void wceex_ThreadDetached(void)
 *******************************************************************************/
 int* wceex_errno(void)
 {
-    int* pErrno = TlsGetValue(s_lTlsIndexErrno);
+    _ptiddata ptd = getptd();
 
-    if (pErrno == 0)
+    if (ptd == NULL)
     {
+        s_lErrnoNoMem = ENOMEM; // could have been overwritten by application
         return &s_lErrnoNoMem;
     }
     else
     {
-        return pErrno;
+        return &(ptd->_terrno);
     }
 }

@@ -112,11 +112,17 @@ char* wceex_getcwd( char *buffer, int maxlen )
 
 DWORD wceex_GetCurrentDirectoryW( DWORD nBufferLength, LPWSTR lpBuffer )
 {
+    if (lpBuffer == NULL && nBufferLength != 0)
+    {
+        SetLastError(ERROR_BAD_ARGUMENTS);
+        return 0;
+    }
+
     // buffer can be NULL
-    if (lpBuffer)
+    if (lpBuffer != NULL)
         *lpBuffer = 0;
 
-    if( InitCwd() )
+    if( InitCwd() != 0 )
     {
         SetLastError( errno );
         return 0;
@@ -148,8 +154,7 @@ BOOL wceex_SetCurrentDirectoryW( LPCWSTR lpPathName )
 
     if (lpPathName == NULL || lpPathName[0] == '\0')
     {
-        errno = ENOENT;
-        SetLastError(errno);
+        SetLastError(ERROR_BAD_ARGUMENTS);
         return FALSE;
     }
 
@@ -159,7 +164,6 @@ BOOL wceex_SetCurrentDirectoryW( LPCWSTR lpPathName )
     if (ulAttr == INVALID_FILE_ATTRIBUTES)
     {
         // invalid path
-        errno = GetLastError();
         return FALSE;
     }
 
@@ -185,8 +189,7 @@ BOOL wceex_SetCurrentDirectoryW( LPCWSTR lpPathName )
     else
     {
         // path points to file
-        errno = ENOENT;
-        SetLastError(errno);
+        SetLastError(ERROR_BAD_ARGUMENTS);
         return FALSE;
     }
 }
