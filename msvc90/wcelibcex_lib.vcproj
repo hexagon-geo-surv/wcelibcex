@@ -21,8 +21,8 @@
 			CharacterSet="1"
 			ConfigurationType="4"
 			InheritedPropertySheets=".\wcelibcex.vsprops"
-			IntermediateDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
-			OutputDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="..\..\..\Binary\VS2008\Intermediate\$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="..\..\..\Binary\VS2008\Output\$(PlatformName)\$(ConfigurationName)"
 			>
 			<Tool Name="VCALinkTool"/>
 			<Tool Name="VCBscMakeTool"/>
@@ -36,7 +36,7 @@
 				MinimalRebuild="true"
 				Optimization="0"
 				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;_LIB;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				/>
@@ -78,8 +78,8 @@
 			CharacterSet="1"
 			ConfigurationType="4"
 			InheritedPropertySheets=".\wcelibcex.vsprops"
-			IntermediateDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
-			OutputDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="..\..\..\Binary\VS2008\Intermediate\$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="..\..\..\Binary\VS2008\Output\$(PlatformName)\$(ConfigurationName)"
 			>
 			<Tool Name="VCALinkTool"/>
 			<Tool Name="VCBscMakeTool"/>
@@ -240,8 +240,8 @@
 			CharacterSet="1"
 			ConfigurationType="4"
 			InheritedPropertySheets=".\wcelibcex.vsprops"
-			IntermediateDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
-			OutputDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="..\..\..\Binary\VS2008\Intermediate\$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="..\..\..\Binary\VS2008\Output\$(PlatformName)\$(ConfigurationName)"
 			>
 			<Tool Name="VCALinkTool"/>
 			<Tool Name="VCBscMakeTool"/>
@@ -254,7 +254,7 @@
 				ExecutionBucket="7"
 				Optimization="2"
 				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;_LIB;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE"
-				RuntimeLibrary="0"
+				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				/>
@@ -296,8 +296,8 @@
 			CharacterSet="1"
 			ConfigurationType="4"
 			InheritedPropertySheets=".\wcelibcex.vsprops"
-			IntermediateDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
-			OutputDirectory="..\..\..\..\Binary\RCL\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="..\..\..\Binary\VS2008\Intermediate\$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="..\..\..\Binary\VS2008\Output\$(PlatformName)\$(ConfigurationName)"
 			>
 			<Tool Name="VCALinkTool"/>
 			<Tool Name="VCBscMakeTool"/>
